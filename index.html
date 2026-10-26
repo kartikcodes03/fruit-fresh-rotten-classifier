@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10231b">
+  <title>FruitCheck — Freshness Classifier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="nav wrap">
+    <a class="brand" href="/"><span class="brand-icon">✳</span> Fruit<span>Check</span></a>
+    <span class="nav-note"><i></i> AI-powered freshness check</span>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow"><span></span> FRESHNESS, AT A GLANCE</div>
+      <h1>Know your fruit.<br><em>Choose fresher.</em></h1>
+      <p class="hero-copy">Upload a photo and let our CNN model check whether your fruit looks fresh or rotten.</p>
+    </section>
+
+    <section class="workspace" aria-label="Fruit image classifier">
+      <div class="upload-card">
+        <div class="card-heading"><div><span class="step">01</span><h2>Upload an image</h2></div><span class="file-type">JPG · PNG · WEBP</span></div>
+        <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+        <button class="dropzone" id="chooseButton" type="button">
+          <span class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4"/></svg></span>
+          <strong id="dropTitle">Drop your fruit photo here</strong>
+          <span id="dropSubtitle">or click to browse files</span>
+          <span class="browse-pill">Choose image <span>↗</span></span>
+        </button>
+        <div class="preview hidden" id="previewWrap">
+          <img id="previewImage" alt="Selected fruit preview">
+          <div class="preview-meta"><div><strong id="fileName">fruit-photo.jpg</strong><span id="fileSize">Ready to analyze</span></div><button id="removeButton" class="remove-button" type="button" aria-label="Remove image">×</button></div>
+        </div>
+        <button class="analyze-button" id="analyzeButton" type="button" disabled><span id="buttonText">Analyze freshness</span><span class="arrow">→</span></button>
+        <p class="privacy-note"><span>⌑</span> Image is used for prediction only in this demo.</p>
+      </div>
+
+      <aside class="result-card">
+        <div class="card-heading"><div><span class="step">02</span><h2>Prediction result</h2></div><span class="live-tag"><i></i> LIVE</span></div>
+        <div class="result-content" id="resultContent">
+          <div class="result-art"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="fruit-emoji">🍎</div><span class="spark spark-one">✦</span><span class="spark spark-two">✳</span></div>
+          <h3>Waiting for your fruit</h3>
+          <p>Your result will appear here after you upload an image and run the analysis.</p>
+          <div class="placeholder-meter"><span></span></div><div class="meter-labels"><span>LOW CONFIDENCE</span><span>HIGH CONFIDENCE</span></div>
+        </div>
+        <div class="result-content hidden" id="loadingContent"><div class="loader"></div><h3>Analyzing image…</h3><p>Your CNN model is checking the image.</p></div>
+        <div class="result-content hidden" id="finalContent">
+          <div class="result-art result-art-small" id="resultArt"><div class="art-orbit orbit-one"></div><div class="fruit-emoji" id="resultEmoji">🍏</div></div>
+          <div class="result-label" id="resultLabel">Fresh</div><h3 id="resultHeadline">Looks fresh!</h3><p id="resultDescription">The model classified this image as fresh.</p>
+          <div class="confidence-head"><span>Model confidence</span><strong id="confidenceValue">0%</strong></div><div class="confidence-track"><span id="confidenceBar"></span></div>
+          <button class="try-again" id="tryAgainButton" type="button">Analyze another image <span>↗</span></button>
+        </div>
+        <div class="result-content hidden" id="errorContent"><div class="error-icon">!</div><h3>Couldn’t analyze this image</h3><p id="errorMessage">Please try another image.</p><button class="try-again" id="errorTryButton" type="button">Try again <span>↗</span></button></div>
+      </aside>
+    </section>
+
+    <section class="how-it-works"><div><span class="section-kicker">SIMPLE BY DESIGN</span><h2>Three steps. One clear result.</h2></div><div class="steps"><article><span>01</span><h3>Choose</h3><p>Upload a clear photo of one fruit.</p></article><article><span>02</span><h3>Analyze</h3><p>Your trained CNN model processes the image.</p></article><article><span>03</span><h3>Understand</h3><p>See the predicted class and confidence score.</p></article></div></section>
+    <footer><a class="brand" href="/"><span class="brand-icon">✳</span> Fruit<span>Check</span></a><span>AI fruit freshness classifier · Student project</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
